@@ -49,6 +49,3 @@ public class AddEmployeePage extends CommonMethods {
     //if someone ask this to you in the interview you have to write the same thing
 
 }
-//first update after jenkins job failed to load.
-// java installed in the machine
-// java_home completed.
