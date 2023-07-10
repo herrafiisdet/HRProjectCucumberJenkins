@@ -51,3 +51,4 @@ public class AddEmployeePage extends CommonMethods {
 }
 //first update after jenkins job failed to load.
 // java installed in the machine
+// java_home completed.
