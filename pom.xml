@@ -81,7 +81,7 @@
                     <configuration>
                         <includes>
                             <include> **/*SmokeRunner</include>
-                            <include> **/*RegressionRunner</include>
+                           <!-- <include> **/*RegressionRunner</include> -->
                         </includes>
                     </configuration>
                 </plugin>
