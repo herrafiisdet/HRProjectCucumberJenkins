@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.syntax</groupId>
+    <artifactId>CucumberProjectHassan</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.9.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>6.9.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>6.9.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <!-- Here the steps to add "Maven Surefire Plugin" this plugin needed to do everything from one place pom.xml
+    1- search in google for "Maven surefire Plugin" this will take you to this link https://maven.apache.org/surefire/maven-surefire-plugin/
+    and here in the left there is a menu we need to click on "Using TestNG" => then scroll down until you see " Using Suite XML Files"
+    select all and copy and paste it like below.
+    change "suiteXmlFiles" to "includes" and inside includes tag we need include.   and change "testng.xml" to "**/*SmokeRunner" which means it
+    will scan all packages and search for SmokeRunner class. we can do this to all runner classes we have.-->
+
+    <build>
+        <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.1.2</version>
+                    <configuration>
+                        <includes>
+                            <include> **/*SmokeRunner</include>
+                            <include> **/*RegressionRunner</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+
+
+            <!-- Here the steps to add "Maven mojo Plugin for cucumber reporting" this plugin needed to generate report
+    1- search in google for "Maven cucumber report" this link will be first in
+    search https://github.com/damianszczepanik/maven-cucumber-reporting
+    .then will copy the code and paste it then change some line and delete some lines.
+    ***** Very important : we must run the test from pom.xml (maven => lifecycle => test) in order
+    to see the new folder named cucumber-html-reports  under the target folder. DO NOT RUN FROM THE RUNNER CLASS
+    Open overview-features.html from the js folder under target folder. it's the only file we need. but we can see other reports if needed-->
+
+            <plugin>
+                <groupId>net.masterthought</groupId> <!-- no change done -->
+                <artifactId>maven-cucumber-reporting</artifactId>  <!-- no change done -->
+                <version>5.7.5</version>   <!-- (check version above)  TO   version showing in GitHub link here is (5.7.5) -->
+                <executions>
+                    <execution>
+                        <id>execution</id> <!-- no change done -->
+                        <phase>test</phase> <!-- (verify) TO (test) -->
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>CucumberProjectHassan</projectName>  <!-- change done -->
+                            <!-- optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified -->
+                              <!-- change done in this line  we removed  <skip>false</skip>  -->
+                            <!-- output directory for the generated report -->
+                            <outputDirectory>${project.build.directory}</outputDirectory> <!-- no change done -->
+                            <!-- optional, defaults to outputDirectory if not specified -->
+                            <inputDirectory>${project.build.directory}</inputDirectory>  <!-- change done removed (/jsonReports) from (${project.build.directory}/jsonReports)  -->
+                            <jsonFiles> <!-- no change done -->
+                                <!-- supports wildcard or name pattern -->
+                                <param>**/*.json</param> <!-- no change done -->
+                            </jsonFiles>
+
+
+                            <!-- delete from here to the  *********  -->
+
+                           <!-- optional, defaults to outputDirectory if not specified
+                            <classificationDirectory>${project.build.directory}/classifications</classificationDirectory>
+                            <classificationFiles>
+                                 supports wildcard or name pattern
+                                <param>sample.properties</param>
+                                <param>other.properties</param>
+                            </classificationFiles>
+                            <parallelTesting>false</parallelTesting>
+                            optional, set true to group features by its Ids
+                            <mergeFeaturesById>false</mergeFeaturesById>
+                             optional, set true to get a final report with latest results of the same test from different test runs
+                            <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
+                             optional, set true to fail build on test failures
+                            <checkBuildResult>false</checkBuildResult>
+                            -->
+                            <!-- ******** -->
+
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+
+    </build>
+
+
+
+</project>
