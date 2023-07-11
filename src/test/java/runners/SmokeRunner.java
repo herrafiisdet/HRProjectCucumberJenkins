@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
         //when we set dryRun to false, it starts execution again
         //dryRun = true,
         dryRun = false,
-        tags = "@regression",
+        tags = "@excel",
         //to remove irrelevant information from console, you need to set monochrome to true
         monochrome = true,
         //pretty keywords prints the steps in the console to increase readability
