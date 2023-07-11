@@ -187,7 +187,7 @@ public class AddEmployeeSteps extends CommonMethods {
             sendText(addEmployee.middleNameField, mapNewEmp.get("middleName"));
             sendText(addEmployee.lastNameField, mapNewEmp.get("lastName"));
             String empIdValue = addEmployee.empIdLocator.getAttribute("value");
-            sendText(addEmployee.photograph, mapNewEmp.get("photograph"));
+            //sendText(addEmployee.photograph, mapNewEmp.get("photograph"));     // i skipped this line until i find a way to use the picture.
             if (!addEmployee.checkBox.isSelected()) {
                 click(addEmployee.checkBox);
             }

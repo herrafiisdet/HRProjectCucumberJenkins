@@ -54,7 +54,7 @@ Feature: Add Employee
 
   @regression @excel
   Scenario: Adding multiple employees using excel file
-    When user adds multiple employee from excel using "EmployeeData" and verify it
+    When user adds multiple employee from excel using "EmployeeDataNoPicture" and verify it
 
 
     #*************************************************************************************************
