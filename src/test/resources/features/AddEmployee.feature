@@ -8,7 +8,7 @@ Feature: Add Employee
     And user clicks on Add Employee button
 
     # 1- parameters passing using hardcoded data
-  @regression @sprint3
+  @regression @sprint3 @AddEmployee
   Scenario: Adding one employee
     #Given user is navigated to HRMS application   // its in Hooks class now
     And user enters firstname and lastname
@@ -16,14 +16,14 @@ Feature: Add Employee
     Then employee added successfully
   #************************************************************************************************
   # 2- parameters passing by passing one set of data from feature file
-  @regression @test1
+  @regression @test1 @AddEmployee
     Scenario: Adding one employee using feature file
       And user enters "Zalam" and "Alia"
       And user clicks on save button
       Then employee added successfully
   #*************************************************************************************************
   # 3- parameters passing using scenario outline -Example table:for passing multiple data sets.
-  @regression @outline
+  @regression @outline @AddEmployee
     Scenario Outline: Adding multiple employees using feature file Scenario Outline
       #here will use Data driven testing=> one script execute multiple sets of data.
       And user  enters "<firstName>" and "<lastName>" for adding multiple employees
@@ -36,7 +36,7 @@ Feature: Add Employee
         |azam       |asel      |
   #**************************************************************************************************
   # 4- parameters passing using Data table : here hooks and background execute one time for multiple data sets.
-  @regression @datatable @tc106
+  @regression @datatable @tc106 @AddEmployee
     Scenario: Adding multiple employees using data table
       When user adds multiple employees and verify they are added successfully
       |firstName|middleName|lastName|
@@ -52,7 +52,7 @@ Feature: Add Employee
   #***************************************************************************************************
   # 5- parameters passing using Excel -  to pass large volume of data.
 
-  @regression @excel
+  @regression @excel @AddEmployee
   Scenario: Adding multiple employees using excel file
     When user adds multiple employee from excel using "EmployeeDataNoPicture" and verify it
 

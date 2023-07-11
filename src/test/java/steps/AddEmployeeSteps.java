@@ -97,7 +97,7 @@ public class AddEmployeeSteps extends CommonMethods {
 
             //till this point one employee has been added
 
-            //verifying the employee is homework
+
             click(dashboard.addEmployeeOption);
             Thread.sleep(2000);
         }
@@ -214,7 +214,7 @@ public class AddEmployeeSteps extends CommonMethods {
 
 
             for (int i = 0; i < rowData.size(); i++) {
-                System.out.println("I am inside the loop and worried about josh");
+                System.out.println("I am inside the loop");
                 //getting the text of every element from here and storing it into string
                 String rowText = rowData.get(i).getText();
                 System.out.println(rowText);
